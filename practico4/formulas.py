@@ -62,12 +62,20 @@ class Formulas:
         
         return a[int(np.random.random() * k)]
     
-def aceptacion_y_rechazo (self, probabilidades_x:dict[any,float], probabilidades_y:dict[any,float],sample_s:int):
-    sample = []
-    while len(sample) < sample_s:
-        # a
-        pass
-    
+    def aceptacion_y_rechazo_u (self, probabilidades_x:dict[any,float], sample_s:int):
+        sample = []
+        
+        while len(sample) <= sample_s:
+            
+            y_pos = random.randint(1, len(probabilidades_x.keys()))
+            y_value = list(probabilidades_x.keys())[y_pos - 1]
+            y_prob = probabilidades_x.get(y_value)
+            
+            u = random.random()
+            if u < y_prob:
+                sample.append(y_value)
+        
+        return sample
 
     
 p = [("caca", 0.1),
@@ -75,9 +83,10 @@ p = [("caca", 0.1),
     ("pis",  0.2)]
 f = Formulas()
 
-for i in range(20):
-    print(f.transformada_inversa(p))
+# for i in range(20):
+#     print(f.transformada_inversa(p))
     
-print(f.geometrica(0.1))
-print(f.poissssssssson(0.25))
-print(f.binomial_n_p(10,0.9))
+# print(f.geometrica(0.1))
+# print(f.poissssssssson(0.25))
+# print(f.binomial_n_p(10,0.9))
+print(f.aceptacion_y_rechazo(probabilidades_x, probabilidades_y, sample_s))
